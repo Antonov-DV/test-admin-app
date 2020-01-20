@@ -1,0 +1,38 @@
+<ion-header color="primary">
+  <div id="app-container" class="app-header app-header--center">
+    <ion-toolbar text-left>
+        <ion-buttons slot="start">
+            <ion-button (click)="performCancel()"><ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back" color="light"></ion-icon></ion-button>
+        </ion-buttons>
+        <ion-title>{{pageTitle}}</ion-title>
+        <ion-buttons slot="end">
+            <ion-button *ngIf="!this.isNew" (click)="performConfirmDelete()"><ion-icon ios="ios-trash" md="md-trash" color="light"></ion-icon></ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+  </div>
+</ion-header>
+
+<ion-content padding>
+  <div class="app-container app-container--center">
+    <form [formGroup]="gradeEditForm" (ngSubmit)="performSave()">
+
+        <div class="ion-item-error" *ngIf="!gradeEditForm.valid && gradeEditForm.errors && gradeEditForm.errors?.serverError">
+            {{gradeEditForm.errors?.serverError.message}}
+        </div>
+
+        <ion-item>
+            <ion-label position="stacked">Grade name</ion-label>
+            <ion-input type="text" formControlName="name"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="stacked">Vocabulary URL</ion-label>
+            <ion-input type="text" formControlName="vocabularyUrl"></ion-input>
+        </ion-item>
+
+        <div class="button-block" text-center>
+            <ion-button (click)="performSave()" margin-top [disabled]="!gradeEditForm.valid || actionInProcess">Save</ion-button>
+        </div>
+    </form>
+  </div>
+</ion-content>

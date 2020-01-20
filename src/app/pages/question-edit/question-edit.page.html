@@ -1,0 +1,79 @@
+<ion-header>
+    <div id="app-container" class="app-header app-header--center">
+        <ion-toolbar text-left>
+            <ion-buttons slot="start">
+                <ion-button (click)="performCancel()">
+                    <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back" color="light"></ion-icon>
+                </ion-button>
+            </ion-buttons>
+            <ion-title *ngIf="this.isNew">Create Question</ion-title>
+            <ion-title *ngIf="!this.isNew">Edit Question</ion-title>
+            <ion-buttons slot="end">
+                <ion-button *ngIf="!this.isNew"
+                            (click)="performConfirmDelete()"
+                            color="danger">
+                    <ion-icon ios="ios-trash" md="md-trash" color="light"></ion-icon>
+                </ion-button>
+            </ion-buttons>
+        </ion-toolbar>
+    </div>
+</ion-header>
+
+<ion-content padding>
+
+    <div class="app-container app-container--center">
+        <form [formGroup]="questionEditForm" (ngSubmit)="performSave()">
+            <ion-item>
+                <ion-label position="stacked">Milestone</ion-label>
+                <custom-select [formGroup]="questionEditForm" placeholder="Select One" formCtlName="milestoneId"
+                               [optionsList]="this.milestonesOptionsList">
+                </custom-select>
+            </ion-item>
+
+            <ion-item class="ios-no-border">
+                <ion-label position="stacked">Question</ion-label>
+                <imperavi-editor [formGroup]="questionEditForm" formCtlName="text"></imperavi-editor>
+            </ion-item>
+
+            <div formArrayName="optionsArray">
+                <ion-item *ngFor="let option of this.optionsList; index as i;">
+                    <ion-label position="stacked">Answer Option {{option.ordering}}</ion-label>
+                    <ion-input type="text" [formControlName]="i"></ion-input>
+                </ion-item>
+            </div>
+
+            <ion-item>
+                <ion-label position="stacked">Correct answer option</ion-label>
+                <ion-select placeholder="Select One" formControlName="correctOptionId">
+                    <ion-select-option *ngFor="let option of this.optionsList" value="{{option.ordering}}">
+                        {{option.ordering}}
+                    </ion-select-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label position="stacked">Level</ion-label>
+                <ion-select placeholder="Select One" formControlName="levelId">
+                    <ion-select-option *ngFor="let level of this.levelsList" [value]="level.levelName">
+                        {{level.levelName}}
+                    </ion-select-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item class="ios-no-border">
+                <ion-label position="stacked">Generic Solution Center Page</ion-label>
+                <imperavi-editor [formGroup]="questionEditForm" formCtlName="solution"></imperavi-editor>
+            </ion-item>
+
+            <ion-item class="ios-no-border">
+                <ion-label position="stacked">Short solution to the problem with a correct answer</ion-label>
+                <imperavi-editor [formGroup]="questionEditForm" formCtlName="shortSolution"></imperavi-editor>
+            </ion-item>
+
+            <div class="button-block" text-center>
+                <ion-button (click)="performSave()" margin-top [disabled]="!questionEditForm.valid || actionInProcess">
+                    Save
+                </ion-button>
+            </div>
+        </form>
+    </div>
+</ion-content>

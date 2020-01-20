@@ -1,0 +1,26 @@
+<ion-header color="primary">
+    <div id="app-container" class="app-header app-header--center">
+        <ion-toolbar text-left>
+            <ion-buttons slot="start">
+                <ion-button (click)="backToMainMenu()"><ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back" color="light"></ion-icon></ion-button>
+            </ion-buttons>
+            <ion-title>Instructors</ion-title>
+        </ion-toolbar>
+    </div>
+</ion-header>
+
+<ion-content padding>
+
+    <div class="app-container app-container--center">
+
+        <ion-list>
+            <ion-item  *ngFor="let instructor of this.instructorsList" detail (click)="editInstructor(instructor.userId)" class="app-container_menu-item">
+                <ion-label>
+                    <h2>{{instructor.firstName}}&nbsp;{{instructor.lastName}}</h2>
+                    <small>{{instructor.email}}</small>
+                </ion-label>
+            </ion-item>
+        </ion-list>
+
+    </div>
+</ion-content>

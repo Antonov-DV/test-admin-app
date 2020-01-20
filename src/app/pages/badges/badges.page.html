@@ -1,0 +1,28 @@
+<ion-header color="primary">
+    <div id="app-container" class="app-header app-header--center">
+        <ion-toolbar text-left>
+            <ion-buttons slot="start">
+                <ion-button (click)="backToMainMenu()"><ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back" color="light"></ion-icon></ion-button>
+            </ion-buttons>
+            <ion-title>Badges</ion-title>
+        </ion-toolbar>
+    </div>
+</ion-header>
+
+<ion-content padding>
+    <div class="app-container app-container--center">
+        <ion-list>
+            <ion-item  *ngFor="let badge of this.badgesList" detail (click)="editBadge(badge.badgeId)" class="app-container_menu-item">
+                <ion-label>
+                    <h2>{{badge.name}}</h2>
+                </ion-label>
+            </ion-item>
+        </ion-list>
+
+        <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="createBadge()">
+            <ion-fab-button>
+                <ion-icon name="add"></ion-icon>
+            </ion-fab-button>
+        </ion-fab>
+    </div>
+</ion-content>

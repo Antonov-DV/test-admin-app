@@ -1,0 +1,41 @@
+<ion-header color="primary">
+    <div id="app-container" class="app-header app-header--center">
+        <ion-toolbar text-left>
+            <ion-buttons slot="start">
+                <ion-button (click)="performCancel()">
+                    <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back" color="light"></ion-icon>
+                </ion-button>
+            </ion-buttons>
+            <ion-title>{{pageTitle}}</ion-title>
+            <ion-buttons slot="end">
+                <ion-button *ngIf="!this.isNew" (click)="performConfirmDelete()">
+                    <ion-icon ios="ios-trash" md="md-trash" color="light"></ion-icon>
+                </ion-button>
+            </ion-buttons>
+        </ion-toolbar>
+    </div>
+</ion-header>
+
+<ion-content padding>
+    <div class="app-container app-container--center">
+        <form [formGroup]="levelEditForm" (ngSubmit)="performSave()">
+
+            <div class="ion-item-error"
+                 *ngIf="!levelEditForm.valid && levelEditForm.errors && levelEditForm.errors?.serverError">
+                {{levelEditForm.errors?.serverError.message}}
+            </div>
+
+            <ion-item>
+                <ion-label position="stacked">Level name</ion-label>
+                <ion-input type="text" formControlName="levelName"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="stacked">Points for correct answer</ion-label>
+                <ion-input type="number" formControlName="points"></ion-input>
+            </ion-item>
+            <div class="button-block" text-center>
+                <ion-button (click)="performSave()" margin-top [disabled]="!levelEditForm.valid || actionInProcess">Save</ion-button>
+            </div>
+        </form>
+    </div>
+</ion-content>

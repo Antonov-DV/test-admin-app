@@ -1,0 +1,27 @@
+<ion-header color="primary">
+  <div id="app-container" class="app-header app-header--center">
+    <ion-toolbar text-left>
+      <ion-title>User: {{username}}</ion-title>
+      <ion-buttons slot="end">
+        <ion-button *ngIf="isLoggedIn()" (click)="logout()"><ion-icon ios="ios-log-out" md="md-log-out" color="light"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </div>
+</ion-header>
+<ion-content padding>
+  <div class="app-container app-container--center">
+    <ion-list>
+        <admin-menu-item label="Grades" count="{{gradesCount}}" path="grades" class="app-container_menu-item"></admin-menu-item>
+        <admin-menu-item label="Milestone Categories" count="{{categoriesCount}}" path="categories" class="app-container_menu-item"></admin-menu-item>
+        <admin-menu-item label="Milestones" count="{{milestonesCount}}" path="milestones" class="app-container_menu-item"></admin-menu-item>
+        <admin-menu-item label="Questions" count="{{questionsCount}}" path="questions" class="app-container_menu-item"></admin-menu-item>
+        <admin-menu-item label="Levels" count="{{levelsCount}}" path="levels" class="app-container_menu-item"></admin-menu-item>
+        <admin-menu-item label="Badges" count="{{badgesCount}}" path="badges" class="app-container_menu-item"></admin-menu-item>
+        <admin-menu-item label="Messages" path="messages" class="app-container_menu-item"></admin-menu-item>
+        <admin-menu-item label="Credit Packages" count="{{creditPackagesCount}}" path="credit-packages" class="app-container_menu-item"></admin-menu-item>
+        <admin-menu-item label="Instructors" count="{{instructorsCount}}" path="instructors"></admin-menu-item>
+        <!--  <admin-menu-item label="Learners" count="789" path="learners"></admin-menu-item> -->
+    </ion-list>
+  </div>
+</ion-content>

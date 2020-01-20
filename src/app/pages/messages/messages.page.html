@@ -1,0 +1,25 @@
+<ion-header color="primary">
+    <div id="app-container" class="app-header app-header--center">
+        <ion-toolbar text-left>
+            <ion-buttons slot="start">
+                <ion-button (click)="backToMainMenu()">
+                    <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back" color="light"></ion-icon>
+                </ion-button>
+            </ion-buttons>
+            <ion-title>Messages</ion-title>
+        </ion-toolbar>
+    </div>
+</ion-header>
+
+<ion-content padding>
+    <div class="app-container app-container--center">
+        <ion-list>
+            <ion-item *ngFor="let message of this.messagesList" detail (click)="editMessage(message.messageId)"
+                      class="app-container_menu-item">
+                <ion-label>
+                    <h2>{{message.caseTitle}}</h2>
+                </ion-label>
+            </ion-item>
+        </ion-list>
+    </div>
+</ion-content>

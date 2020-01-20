@@ -1,0 +1,30 @@
+<ion-header color="primary">
+    <div id="app-container" class="app-header app-header--center">
+        <ion-toolbar text-left>
+            <ion-buttons slot="start">
+                <ion-button (click)="performCancel()">
+                    <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back" color="light"></ion-icon>
+                </ion-button>
+            </ion-buttons>
+            <ion-title>Edit MyPal Message</ion-title>
+        </ion-toolbar>
+    </div>
+</ion-header>
+
+<ion-content padding>
+    <div class="app-container app-container--center">
+        <form [formGroup]="messageEditForm" (ngSubmit)="performSave()">
+
+            <ion-label position="stacked">Message condition</ion-label>
+            <ion-label>{{messageCaseTitle}}</ion-label>
+
+            <ion-item>
+                <ion-label position="stacked">Message text</ion-label>
+                <ion-textarea formControlName="text"></ion-textarea>
+            </ion-item>
+            <div class="button-block" text-center>
+                <ion-button (click)="performSave()" margin-top>Save</ion-button>
+            </div>
+        </form>
+    </div>
+</ion-content>

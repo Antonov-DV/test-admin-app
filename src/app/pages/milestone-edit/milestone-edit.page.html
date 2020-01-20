@@ -1,0 +1,76 @@
+<ion-header color="primary">
+  <div id="app-container" class="app-header app-header--center">
+    <ion-toolbar text-left>
+        <ion-buttons slot="start">
+            <ion-button (click)="performCancel()"><ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back" color="light"></ion-icon></ion-button>
+        </ion-buttons>
+        <ion-title>{{pageTitle}}</ion-title>
+        <ion-buttons slot="end">
+            <ion-button *ngIf="!this.isNew"
+                        (click)="performConfirmDelete()">
+                <ion-icon ios="ios-trash" md="md-trash" color="light"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+  </div>
+</ion-header>
+
+<ion-content padding>
+  <div class="app-container app-container--center app-container--edit-page">
+    <form [formGroup]="milestoneEditForm" (ngSubmit)="performSave()">
+
+        <div class="ion-item-error" *ngIf="!milestoneEditForm.valid && milestoneEditForm.errors && milestoneEditForm.errors?.serverError">
+            {{milestoneEditForm.errors?.serverError.message}}
+        </div>
+
+
+        <ion-item>
+            <ion-label position="stacked">Milestone category</ion-label>
+            <ion-select placeholder="Select One"
+                        formControlName="categoryId"
+            >
+                <ion-select-option *ngFor="let category of this.categoriesList" [value]="category.categoryId">{{category.name}}</ion-select-option>
+            </ion-select>
+        </ion-item>
+
+
+        <ion-item>
+            <ion-label position="stacked">Milestone name</ion-label>
+            <ion-input type="text"  formControlName="name"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="stacked">Video Url</ion-label>
+            <ion-input type="text" formControlName="videoUrl"></ion-input>
+        </ion-item>
+
+        <ion-item class="ios-drag-and-drop">
+            <ion-list *ngIf="!isNew" reorder="true" (ionItemReorder)="reorderItems($event)">
+                <ion-list-header class="ios-list-label">
+                    <ion-label>Questions <em>(drag-n-drop to change order)</em></ion-label>
+                </ion-list-header>
+                <ion-reorder-group disabled="false">
+                    <ion-item *ngFor="let question of this.questions">
+
+                        <ion-label [innerHtml]="getQuestionTitle(question)"></ion-label>
+
+                        <ion-reorder slot="start"></ion-reorder>
+                        <ion-button slot="end" (click)="editQuestion(question.questionId)">Edit</ion-button>
+                    </ion-item>
+                </ion-reorder-group>
+            </ion-list>
+        </ion-item>
+
+        <ion-fab *ngIf="!isNew" vertical="middle" horizontal="end" (click)="addQuestion()">
+            <ion-fab-button>
+                <ion-icon name="add"></ion-icon>
+            </ion-fab-button>
+        </ion-fab>
+
+
+        <div class="button-block" text-center>
+            <ion-button (click)="performSave()" margin-top [disabled]="!milestoneEditForm.valid || actionInProcess">Save</ion-button>
+        </div>
+    </form>
+  </div>
+</ion-content>

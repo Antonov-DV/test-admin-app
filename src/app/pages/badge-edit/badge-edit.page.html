@@ -1,0 +1,54 @@
+<ion-header color="primary">
+    <div id="app-container" class="app-header app-header--center">
+        <ion-toolbar text-left>
+            <ion-buttons slot="start">
+                <ion-button (click)="performCancel()"><ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back" color="light"></ion-icon></ion-button>
+            </ion-buttons>
+            <ion-title>{{pageTitle}}</ion-title>
+            <ion-buttons slot="end">
+                <ion-button *ngIf="!this.isNew" (click)="performConfirmDelete()"><ion-icon ios="ios-trash" md="md-trash" color="light"></ion-icon></ion-button>
+            </ion-buttons>
+        </ion-toolbar>
+    </div>
+</ion-header>
+
+<ion-content padding>
+    <div class="app-container app-container--center">
+        <form [formGroup]="badgeEditForm" (ngSubmit)="performSave()">
+
+
+            <div class="ion-item-error" *ngIf="!badgeEditForm.valid && badgeEditForm.errors && badgeEditForm.errors?.serverError">
+                {{badgeEditForm.errors?.serverError.message}}
+            </div>
+
+            <ion-item>
+                <ion-label position="stacked">Badge name</ion-label>
+                <ion-input type="text" formControlName="name"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">Badge SVG image URL</ion-label>
+                <ion-input type="text" formControlName="imageUrl"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">Max milestone complete time (minutes)</ion-label>
+                <ion-input type="number" min="0" formControlName="maxMinutes"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">Min milestone correct answers (%)</ion-label>
+                <ion-input type="number" min="0" max="100" formControlName="minCorrectAnswers"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">Min milestone helpers use (%)</ion-label>
+                <ion-input type="number" min="0" max="100" formControlName="minHelpersUse"></ion-input>
+            </ion-item>
+
+            <div class="button-block" text-center>
+                <ion-button (click)="performSave()" margin-top [disabled]="!badgeEditForm.valid || actionInProcess">Save</ion-button>
+            </div>
+        </form>
+    </div>
+</ion-content>

@@ -1,0 +1,233 @@
+﻿type DTestLevel {
+  id: Int!
+  name: String
+  points: Int
+}
+
+type DTestLevelConnection {
+  items: [DTestLevel]
+  nextToken: String
+}
+
+type TestGradeType {
+  id: ID!
+  name: String
+}
+
+type TestGradeTypeConnection {
+  items: [TestGradeType]
+  nextToken: String
+}
+
+type TestMilestone {
+  category_id: Int
+  id: Int!
+  name: String
+}
+
+type TestMilestoneCategory {
+  id: Int!
+  name: String!
+}
+
+type TestMilestoneCategoryConnection {
+  items: [TestMilestoneCategory]
+  nextToken: String
+}
+
+type TestMilestoneConnection {
+  items: [TestMilestone]
+  nextToken: String
+}
+
+type Mutation {
+  createDTestLevel(input: CreateDTestLevelInput!): DTestLevel
+  createTestGradeType(input: CreateTestGradeTypeInput!): TestGradeType
+  createTestMilestone(input: CreateTestMilestoneInput!): TestMilestone
+  createTestMilestoneCategory(input: CreateTestMilestoneCategoryInput!): TestMilestoneCategory
+  deleteDTestLevel(input: DeleteDTestLevelInput!): DTestLevel
+  deleteTestGradeType(input: DeleteTestGradeTypeInput!): TestGradeType
+  deleteTestMilestone(input: DeleteTestMilestoneInput!): TestMilestone
+  deleteTestMilestoneCategory(input: DeleteTestMilestoneCategoryInput!): TestMilestoneCategory
+  updateDTestLevel(input: UpdateDTestLevelInput!): DTestLevel
+  updateTestGradeType(input: UpdateTestGradeTypeInput!): TestGradeType
+  updateTestMilestone(input: UpdateTestMilestoneInput!): TestMilestone
+  updateTestMilestoneCategory(input: UpdateTestMilestoneCategoryInput!): TestMilestoneCategory
+}
+
+type Query {
+  getDTestLevel(id: Int!): DTestLevel
+  getTestGradeType(id: ID!, name: String!): TestGradeType
+  getTestMilestone(id: Int!): TestMilestone
+  getTestMilestoneCategory(id: Int!, name: String!): TestMilestoneCategory
+  listDTestLevels(filter: TableDTestLevelFilterInput, limit: Int, nextToken: String): DTestLevelConnection
+  listTestGradeTypes(filter: TableTestGradeTypeFilterInput, limit: Int, nextToken: String): TestGradeTypeConnection
+  listTestMilestoneCategories(filter: TableTestMilestoneCategoryFilterInput, limit: Int, nextToken: String): TestMilestoneCategoryConnection
+  listTestMilestones(filter: TableTestMilestoneFilterInput, limit: Int, nextToken: String): TestMilestoneConnection
+}
+
+type Subscription {
+  onCreateDTestLevel(id: Int, name: String, points: Int): DTestLevel
+    @aws_subscribe(mutations:["createDTestLevel"])
+  onCreateTestGradeType(id: ID, name: String): TestGradeType
+    @aws_subscribe(mutations:["createTestGradeType"])
+  onCreateTestMilestone(category_id: Int, id: Int, name: String): TestMilestone
+    @aws_subscribe(mutations:["createTestMilestone"])
+  onCreateTestMilestoneCategory(id: Int, name: String): TestMilestoneCategory
+    @aws_subscribe(mutations:["createTestMilestoneCategory"])
+  onDeleteDTestLevel(id: Int, name: String, points: Int): DTestLevel
+    @aws_subscribe(mutations:["deleteDTestLevel"])
+  onDeleteTestGradeType(id: ID, name: String): TestGradeType
+    @aws_subscribe(mutations:["deleteTestGradeType"])
+  onDeleteTestMilestone(category_id: Int, id: Int, name: String): TestMilestone
+    @aws_subscribe(mutations:["deleteTestMilestone"])
+  onDeleteTestMilestoneCategory(id: Int, name: String): TestMilestoneCategory
+    @aws_subscribe(mutations:["deleteTestMilestoneCategory"])
+  onUpdateDTestLevel(id: Int, name: String, points: Int): DTestLevel
+    @aws_subscribe(mutations:["updateDTestLevel"])
+  onUpdateTestGradeType(id: ID, name: String): TestGradeType
+    @aws_subscribe(mutations:["updateTestGradeType"])
+  onUpdateTestMilestone(category_id: Int, id: Int, name: String): TestMilestone
+    @aws_subscribe(mutations:["updateTestMilestone"])
+  onUpdateTestMilestoneCategory(id: Int, name: String): TestMilestoneCategory
+    @aws_subscribe(mutations:["updateTestMilestoneCategory"])
+}
+
+input CreateDTestLevelInput {
+  id: Int!
+  name: String
+  points: Int
+}
+
+input CreateTestGradeTypeInput {
+  id: ID!
+  name: String!
+}
+
+input CreateTestMilestoneCategoryInput {
+  id: Int!
+  name: String!
+}
+
+input CreateTestMilestoneInput {
+  category_id: Int
+  id: Int!
+  name: String
+}
+
+input DeleteDTestLevelInput {
+  id: Int!
+}
+
+input DeleteTestGradeTypeInput {
+  id: ID!
+  name: String!
+}
+
+input DeleteTestMilestoneCategoryInput {
+  id: Int!
+  name: String!
+}
+
+input DeleteTestMilestoneInput {
+  id: Int!
+}
+
+input TableBooleanFilterInput {
+  eq: Boolean
+  ne: Boolean
+}
+
+input TableDTestLevelFilterInput {
+  id: TableIntFilterInput
+  name: TableStringFilterInput
+  points: TableIntFilterInput
+}
+
+input TableFloatFilterInput {
+  between: [Float]
+  contains: Float
+  eq: Float
+  ge: Float
+  gt: Float
+  le: Float
+  lt: Float
+  ne: Float
+  notContains: Float
+}
+
+input TableIDFilterInput {
+  beginsWith: ID
+  between: [ID]
+  contains: ID
+  eq: ID
+  ge: ID
+  gt: ID
+  le: ID
+  lt: ID
+  ne: ID
+  notContains: ID
+}
+
+input TableIntFilterInput {
+  between: [Int]
+  contains: Int
+  eq: Int
+  ge: Int
+  gt: Int
+  le: Int
+  lt: Int
+  ne: Int
+  notContains: Int
+}
+
+input TableTestGradeTypeFilterInput {
+  id: TableIDFilterInput
+  name: TableStringFilterInput
+}
+
+input TableTestMilestoneCategoryFilterInput {
+  id: TableIntFilterInput
+  name: TableStringFilterInput
+}
+
+input TableTestMilestoneFilterInput {
+  category_id: TableIntFilterInput
+  id: TableIntFilterInput
+  name: TableStringFilterInput
+}
+
+input TableStringFilterInput {
+  beginsWith: String
+  between: [String]
+  contains: String
+  eq: String
+  ge: String
+  gt: String
+  le: String
+  lt: String
+  ne: String
+  notContains: String
+}
+
+input UpdateDTestLevelInput {
+  id: Int!
+  name: String
+  points: Int
+}
+
+input UpdateTestGradeTypeInput {
+  id: ID!
+  name: String!
+}
+
+input UpdateTestMilestoneCategoryInput {
+  id: Int!
+  name: String!
+}
+
+input UpdateTestMilestoneInput {
+  category_id: Int
+  id: Int!
+  name: String
+}

@@ -1,0 +1,17 @@
+<ion-header color="primary">
+    <div id="app-container" class="app-header app-header--center">
+        <ion-toolbar text-left>
+            <ion-buttons slot="start">
+                <ion-button (click)="dismiss()"><ion-icon ios="ios-close-circle-outline" md="md-close-circle-outline" color="light"></ion-icon></ion-button>
+            </ion-buttons>
+            <ion-title>{{modalTitle}}</ion-title>
+        </ion-toolbar>
+    </div>
+</ion-header>
+
+<ion-content padding>
+    <div class="app-container app-container--center">
+        TEST VALUE {{testValue}}
+    </div>
+    <ion-button (click)="dismiss()">Close modal button</ion-button>
+</ion-content>

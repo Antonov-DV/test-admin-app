@@ -1,0 +1,40 @@
+<ion-header color="primary">
+  <div id="app-container" class="app-header app-header--center">
+    <ion-toolbar text-left>
+        <ion-buttons slot="start">
+            <ion-button (click)="performCancel()"><ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back" color="light"></ion-icon></ion-button>
+        </ion-buttons>
+        <ion-title>{{pageTitle}}</ion-title>
+        <ion-buttons slot="end">
+            <ion-button *ngIf="!this.isNew" (click)="performConfirmDelete()"><ion-icon ios="ios-trash" md="md-trash" color="light"></ion-icon></ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+  </div>
+</ion-header>
+
+<ion-content padding>
+  <div class="app-container app-container--center">
+    <form [formGroup]="categoryEditForm" (ngSubmit)="performSave()">
+
+        <div class="ion-item-error" *ngIf="!categoryEditForm.valid && categoryEditForm.errors && categoryEditForm.errors?.serverError">
+            {{categoryEditForm.errors?.serverError.message}}
+        </div>
+
+        <ion-item>
+            <ion-label position="stacked">Milestone category name</ion-label>
+            <ion-input type="text" formControlName="name"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="stacked">Milestone grade</ion-label>
+            <ion-select formControlName="gradeId" ok-text="Select" cancel-text="Dismiss">
+                <ion-select-option *ngFor="let grade of this.gradesList" [value]="grade.gradeId">{{grade.name}}</ion-select-option>
+            </ion-select>
+        </ion-item>
+
+        <div class="button-block" text-center>
+            <ion-button (click)="performSave()" margin-top [disabled]="!categoryEditForm.valid || actionInProcess">Save</ion-button>
+        </div>
+    </form>
+  </div>
+</ion-content>

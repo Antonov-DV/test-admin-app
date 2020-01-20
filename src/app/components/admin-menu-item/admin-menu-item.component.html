@@ -1,0 +1,7 @@
+<ion-item detail (click)="routeToPath()">
+    <ion-label>
+        <h2>{{label}}</h2>
+    </ion-label>
+    <!-- <ion-note class="user-stats-item__value" item-end>{{count}}</ion-note> -->
+    <ion-badge color="primary" *ngIf="count">{{count}}</ion-badge>
+</ion-item>

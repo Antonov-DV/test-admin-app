@@ -1,0 +1,44 @@
+<ion-header color="primary">
+    <div id="app-container" class="app-header app-header--center">
+        <ion-toolbar text-left>
+            <ion-buttons slot="start">
+                <ion-button (click)="performCancel()"><ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back" color="light"></ion-icon></ion-button>
+            </ion-buttons>
+            <ion-title>{{pageTitle}}</ion-title>
+            <ion-buttons slot="end">
+                <ion-button *ngIf="!this.isNew" (click)="performConfirmDelete()"><ion-icon ios="ios-trash" md="md-trash" color="light"></ion-icon></ion-button>
+            </ion-buttons>
+        </ion-toolbar>
+    </div>
+</ion-header>
+
+<ion-content padding>
+    <div class="app-container app-container--center">
+        <form [formGroup]="creditPackageEditForm" (ngSubmit)="performSave()">
+
+
+            <div class="ion-item-error" *ngIf="!creditPackageEditForm.valid && creditPackageEditForm.errors && creditPackageEditForm.errors?.serverError">
+                {{creditPackageEditForm.errors?.serverError.message}}
+            </div>
+
+            <ion-item>
+                <ion-label position="stacked">Package name</ion-label>
+                <ion-input type="text" formControlName="name"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">Package cost ($)</ion-label>
+                <ion-input type="number" [step]="0.01" formControlName="costUSD"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">Credits amount</ion-label>
+                <ion-input type="number" [step]="0.01" min="0" formControlName="amountCredits"></ion-input>
+            </ion-item>
+
+            <div class="button-block" text-center>
+                <ion-button (click)="performSave()" margin-top [disabled]="!creditPackageEditForm.valid || actionInProcess">Save</ion-button>
+            </div>
+        </form>
+    </div>
+</ion-content>

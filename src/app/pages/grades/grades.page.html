@@ -1,0 +1,31 @@
+<ion-header color="primary">
+    <div id="app-container" class="app-header app-header--center">
+        <ion-toolbar text-left>
+            <ion-buttons slot="start">
+                <ion-button (click)="backToMainMenu()">
+                    <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back" color="light"></ion-icon>
+                </ion-button>
+            </ion-buttons>
+            <ion-title>Grades</ion-title>
+        </ion-toolbar>
+    </div>
+</ion-header>
+
+<ion-content padding>
+    <div class="app-container app-container--center">
+        <ion-list>
+            <ion-item *ngFor="let grade of this.gradesList" detail (click)="editGrade(grade.gradeId)"
+                      class="app-container_menu-item">
+                <ion-label>
+                    <h2>{{grade.name}}</h2>
+                </ion-label>
+            </ion-item>
+        </ion-list>
+    </div>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="createGrade()">
+        <ion-fab-button>
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>
+

@@ -1,0 +1,21 @@
+<ion-header color="primary">
+    <div id="app-container" class="app-header app-header--center">
+        <ion-toolbar text-left>
+            <ion-buttons slot="start">
+                <ion-button (click)="backToMainMenu()"><ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back" color="light"></ion-icon></ion-button>
+            </ion-buttons>
+            <ion-title>Alert Examples</ion-title>
+            <ion-buttons slot="end">
+                <ion-button *ngIf="!this.isNew" (click)="performDelete()"><ion-icon ios="ios-trash" md="md-trash" color="light"></ion-icon></ion-button>
+            </ion-buttons>
+        </ion-toolbar>
+    </div>
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-button (click)="presentSimple()">Simple</ion-button>
+    <ion-button (click)="presentConfirm()">Confirm</ion-button>
+
+</ion-content>

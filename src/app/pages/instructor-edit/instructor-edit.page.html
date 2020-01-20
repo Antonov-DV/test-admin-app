@@ -1,0 +1,55 @@
+<ion-header color="primary">
+    <div id="app-container" class="app-header app-header--center">
+        <ion-toolbar text-left>
+            <ion-buttons slot="start">
+                <ion-button (click)="performCancel()"><ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back" color="light"></ion-icon></ion-button>
+            </ion-buttons>
+            <ion-title>{{pageTitle}}</ion-title>
+            <!--<ion-buttons slot="end">
+                <ion-button *ngIf="!this.isNew" (click)="performConfirmDelete()"><ion-icon ios="ios-trash" md="md-trash" color="light"></ion-icon></ion-button>
+            </ion-buttons>-->
+        </ion-toolbar>
+    </div>
+</ion-header>
+
+<ion-content padding>
+    <div class="app-container app-container--center">
+
+        <form [formGroup]="instructorEditForm" (ngSubmit)="performSave()">
+
+            <div class="ion-item-error" *ngIf="!instructorEditForm.valid && instructorEditForm.errors && instructorEditForm.errors?.serverError">
+                {{instructorEditForm.errors?.serverError.message}}
+            </div>
+
+            <ion-item>
+                <ion-label position="stacked">First name</ion-label>
+                <ion-input type="text" formControlName="firstName"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">Last name</ion-label>
+                <ion-input type="text" formControlName="lastName"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">Email</ion-label>
+                <ion-input type="text" formControlName="email"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">Phone</ion-label>
+                <ion-input type="text" formControlName="phone"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">Credits balance</ion-label>
+                <ion-input type="number" formControlName="creditsBalance"></ion-input>
+            </ion-item>
+
+
+            <div class="button-block" text-center>
+                <ion-button (click)="performSave()" margin-top [disabled]="!instructorEditForm.valid || actionInProcess">Save</ion-button>
+            </div>
+        </form>
+    </div>
+</ion-content>
